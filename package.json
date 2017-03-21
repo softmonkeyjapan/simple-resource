@@ -1,0 +1,29 @@
+{
+  "name": "simple-resource",
+  "version": "1.0.0",
+  "description": "Connects business objects and REST web services for Angular.js",
+  "author": "Loic Kartono <kartono.loic@gmail.com> (http://www.kartono-loic.com)",
+  "scripts": {
+    "postinstall": "bower install",
+    "pretest": "rimraf coverage/",
+    "test": "gulp test",
+    "preversion": "npm test"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-wrap": "^0.13.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "main-bower-files": "^2.13.1",
+    "phantomjs-prebuilt": "^2.1.13",
+    "rimraf": "^2.5.4"
+  }
+}

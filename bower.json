@@ -1,0 +1,30 @@
+{
+  "name": "simple-resource",
+  "version": "1.0.0",
+  "authors": [
+    "Loic Kartono <kartono.loic@gmail.com>"
+  ],
+  "description": "Connects business objects and REST web services for AngularJs",
+  "main": "dist/simple-resource.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/wamland-team/simple-resource.git"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/wamland-team/simple-resource",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "example"
+  ],
+  "devDependencies": {
+    "angular": "^1.4.12",
+    "angular-mocks": "^1.4.12"
+  },
+  "dependencies": {
+    "angular-inflector": "^0.2.5",
+    "angular-resource": "^1.6.3"
+  }
+}
