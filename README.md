@@ -1,9 +1,25 @@
 SimpleResource
 ==============
 
-[![CircleCI](https://circleci.com/gh/wamland-team/simple-resource.svg?style=shield&circle-token=620045f0f5415b519c4a9b1d4ca98200f18b4acc)](https://circleci.com/gh/wamland-team/simple-resource)
+[![CircleCI](https://circleci.com/gh/softmonkeyjapan/simple-resource.svg?style=shield&circle-token=c26d5c8aeb9d99cdba26ae252862c49330c212fc)](https://circleci.com/gh/softmonkeyjapan/simple-resource)
+[![npm version](https://badge.fury.io/js/simpleresource.svg)](http://badge.fury.io/js/simpleresource)
+[![Bower version](https://badge.fury.io/bo/simpleresource.svg)](http://badge.fury.io/bo/simpleresource)
 
 SimpleResource aims to provide a simple way to connect your Angular application to a RESTful backend API.
+
+# Installation
+
+You can use either `bower`
+
+```
+bower install simpleresource --save
+```
+
+or `npm` to install the package
+
+```
+npm install simpleresource --save
+```
 
 # Quick setup
 
@@ -143,7 +159,4 @@ Note that using a `string` for the constructor will use the global `apiUrl` defi
 
 # Todos
 
-- [ ] SimpleResource methods
-- [ ] SimpleResource configuration
-- [ ] SimplePaginator API
-- [ ] SimplePaginator configuration
+- [ ] Improve documentation

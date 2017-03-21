@@ -1,5 +1,5 @@
 {
-  "name": "simple-resource",
+  "name": "simpleresource",
   "version": "1.0.0",
   "authors": [
     "Loic Kartono <kartono.loic@gmail.com>"
@@ -8,10 +8,10 @@
   "main": "dist/simple-resource.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/wamland-team/simple-resource.git"
+    "url": "git://github.com/softmonkeyjapan/simple-resource.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/wamland-team/simple-resource",
+  "homepage": "https://github.com/softmonkeyjapan/simple-resource",
   "ignore": [
     "**/.*",
     "node_modules",
