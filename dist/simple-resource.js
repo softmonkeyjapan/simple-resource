@@ -111,8 +111,8 @@ angular
       var defaults = {
         query:   { method: 'GET', isArray: true, transformResponse: SRInterceptor.response },
         get:     { method: 'GET' },
-        create:  { method: 'POST', transformRequest: SRInterceptor.request },
-        update:  { method: 'PUT',  transformRequest: SRInterceptor.request },
+        create:  { method: 'POST',  transformRequest: SRInterceptor.request },
+        update:  { method: 'PATCH', transformRequest: SRInterceptor.request },
         destroy: { method: 'DELETE' }
       }
       angular.extend(defaults, SRParameters.get('methods'))
