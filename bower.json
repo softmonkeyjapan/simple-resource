@@ -24,7 +24,7 @@
     "angular-mocks": "^1.4.12"
   },
   "dependencies": {
-    "angular-inflector": "^0.2.5",
-    "angular-resource": "^1.6.3"
+    "angular-inflector": "^0.2.3",
+    "angular-resource": "^1.4.12"
   }
 }
