@@ -4,6 +4,7 @@ SimpleResource
 [![CircleCI](https://circleci.com/gh/softmonkeyjapan/simple-resource.svg?style=shield&circle-token=c26d5c8aeb9d99cdba26ae252862c49330c212fc)](https://circleci.com/gh/softmonkeyjapan/simple-resource)
 [![npm version](https://badge.fury.io/js/simpleresource.svg)](http://badge.fury.io/js/simpleresource)
 [![Bower version](https://badge.fury.io/bo/simpleresource.svg)](http://badge.fury.io/bo/simpleresource)
+[![codecov](https://codecov.io/gh/softmonkeyjapan/simple-resource/branch/master/graph/badge.svg)](https://codecov.io/gh/softmonkeyjapan/simple-resource)
 
 SimpleResource aims to provide a simple way to connect your Angular application to a RESTful backend API.
 
