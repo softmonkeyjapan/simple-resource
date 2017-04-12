@@ -106,19 +106,40 @@ angular
   })
   .factory('SimpleResource', ["$resource", "SRHelper", "SRInterceptor", "SRParameters", function ($resource, SRHelper, SRInterceptor, SRParameters) {
     var Resource = function (options) {
-      SRParameters.set(options)
+      var options = SRParameters.format(options)
+
+      /**
+       * Transform response method.
+       *
+       * @param  {Mix} data Response data.
+       * @param  {Function} headers Response headers.
+       * @return {Mix}
+       */
+      var transformResponse = function (data, headers) {
+        return SRInterceptor.response(options.namespace, data, headers);
+      }
+
+      /**
+       * Transform request method.
+       *
+       * @param  {Object} data - Data to send.
+       * @return {String} Stringify data.
+       */
+      var transformRequest = function (data) {
+        return SRInterceptor.request(options.namespace, data)
+      }
 
       var defaults = {
-        query:   { method: 'GET', isArray: true, transformResponse: SRInterceptor.response },
+        query:   { method: 'GET', isArray: true, transformResponse: transformResponse },
         get:     { method: 'GET' },
-        create:  { method: 'POST',  transformRequest: SRInterceptor.request },
-        update:  { method: 'PATCH', transformRequest: SRInterceptor.request },
+        create:  { method: 'POST',  transformRequest: transformRequest },
+        update:  { method: 'PATCH', transformRequest: transformRequest },
         destroy: { method: 'DELETE' }
       }
-      angular.extend(defaults, SRParameters.get('methods'))
+      angular.extend(defaults, options.methods)
 
-      var endpoint = SRParameters.get('baseUrl') + SRParameters.get('url')
-      var resource = $resource(endpoint, SRParameters.get('params'), defaults)
+      var endpoint = options.baseUrl + options.url
+      var resource = $resource(endpoint, options.params, defaults)
 
       /**
        * Get an entire collection of objects.
@@ -208,11 +229,11 @@ function SRHelper (inflector) {
 }
 
 
-SRInterceptor.$inject = ["SRParameters", "SimpleResourceSettings", "SimplePaginator"];angular
+SRInterceptor.$inject = ["SimpleResourceSettings", "SimplePaginator"];angular
   .module('SimpleResource')
   .service('SRInterceptor', SRInterceptor)
 
-function SRInterceptor (SRParameters, SimpleResourceSettings, SimplePaginator) {
+function SRInterceptor (SimpleResourceSettings, SimplePaginator) {
   var service = {
     response: response,
     request : request
@@ -230,12 +251,13 @@ function SRInterceptor (SRParameters, SimpleResourceSettings, SimplePaginator) {
    * Allows end user to change the response using a
    * custom method through SimpleResourceSettings.transformResponse.
    *
+   * @param  {String} namespace Resource namespace.
    * @param  {Mix} data Response data.
    * @param  {Function} headers Response headers.
    * @return {Mix}
    */
-  function response (data, headers) {
-    SimplePaginator.set(headers(), SRParameters.get('namespace'))
+  function response (namespace, data, headers) {
+    SimplePaginator.set(headers(), namespace)
 
     /* istanbul ignore else */
     if (SimpleResourceSettings.transformResponse) {
@@ -255,11 +277,12 @@ function SRInterceptor (SRParameters, SimpleResourceSettings, SimplePaginator) {
    * Allows end user to change the request using a
    * custom method through SimpleResourceSettings.transformRequest.
    *
+   * @param  {String} namespace Resource namespace.
    * @param  {Object} data - Data to send.
    * @return {String} Stringify data.
    */
-  function request (data) {
-    var namespace = SRParameters.get('namespace')
+  function request (namespace, data) {
+    var namespace = namespace
     var requested = data
 
     /* istanbul ignore else */
@@ -285,35 +308,23 @@ SRParameters.$inject = ["inflector", "SimpleResourceSettings"];angular
 
 function SRParameters (inflector, SimpleResourceSettings) {
   var service = {
-    get: get,
-    set: set
+    format: format
   }
 
   return service
 
   /**
-   * Get a given option.
-   *
-   * @param  {String} key option name.
-   * @return {Mix} Option's value.
-   */
-  function get (key) {
-    this.options = this.options || {}
-    if (key) return this.options[key]
-    return this.options
-  }
-
-  /**
-   * Transform and set options.
+   * Transform and format options.
    *
    * @param  {Mix} Javascript object or string (singular resource name).
    * @return {void}
    */
-  function set (options) {
-    this.options = transform(options)
-    this.options.params  = this.options.params  || {}
-    this.options.methods = this.options.methods || {}
-    this.options.baseUrl = this.options.baseUrl || SimpleResourceSettings.apiUrl
+  function format (options) {
+    var options = transform(options)
+    options.params  = options.params  || {}
+    options.methods = options.methods || {}
+    options.baseUrl = options.baseUrl || SimpleResourceSettings.apiUrl
+    return options
   }
 
   /**
