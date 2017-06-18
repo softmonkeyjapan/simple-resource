@@ -5,7 +5,6 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var ngAnnotate = require('gulp-ng-annotate');
 var mainBowerFiles = require('main-bower-files');
-var wrap = require("gulp-wrap");
 
 gulp.task('default', ['watch']);
 
@@ -19,7 +18,6 @@ gulp.task('js', function () {
   return gulp.src(files)
     .pipe(ngAnnotate())
     .pipe(concat('simple-resource.js'))
-    .pipe(wrap("(function(){\n'use strict';\n<%= contents %>\n})();"))
     .pipe(gulp.dest('dist'))
 
     .pipe(uglify())
