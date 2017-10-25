@@ -1,6 +1,6 @@
 {
   "name": "simpleresource",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Connects business objects and REST web services for Angular.js",
   "author": "Loic Kartono <kartono.loic@gmail.com> (http://www.kartono-loic.com)",
   "scripts": {
