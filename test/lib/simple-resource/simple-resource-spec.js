@@ -82,7 +82,7 @@
         it('uses the `$update` method from $resource', function () {
           instance.id = 10
           instance.save()
-          expect(instance.$update).toHaveBeenCalled()
+          expect(instance.$update).toHaveBeenCalledWith({ id: 10 })
         })
       })
     })
