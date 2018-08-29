@@ -91,11 +91,13 @@
       'SimplePaginator'
     ])
     .provider('SimpleResourceSettings', function () {
-      this.apiUrl = undefined
+      this.apiUrl = this.transformResponse = this.transformRequest = undefined
 
       this.$get = function () {
         return {
           apiUrl: this.apiUrl,
+          transformResponse: this.transformResponse,
+          transformRequest: this.transformRequest
         }
       }
 
@@ -132,7 +134,7 @@
 
         var defaults = {
           query:   { method: 'GET', isArray: true, transformResponse: transformResponse },
-          get:     { method: 'GET' },
+          get:     { method: 'GET',   transformResponse: transformResponse },
           create:  { method: 'POST',  transformRequest: transformRequest },
           update:  { method: 'PATCH', transformRequest: transformRequest },
           destroy: { method: 'DELETE' }
@@ -211,6 +213,30 @@
 })();
 
 (function () {
+  angular
+    .module('SimpleResource')
+    .service('SRHelper', SRHelper)
+
+  function SRHelper () {
+    var service = {
+      isNumeric: isNumeric
+    }
+
+    return service
+
+    /**
+     * Check whether an object is a number.
+     *
+     * @param  {Object} object - Object to check numericallity on.
+     * @return {Boolean} True if number, false otherwise.
+     */
+    function isNumeric (object) {
+      return !isNaN(parseFloat(object)) && isFinite(object);
+    }
+  }
+})();
+
+(function () {
   SRInterceptor.$inject = ["SimpleResourceSettings", "SimplePaginator"];
   angular
     .module('SimpleResource')
@@ -281,31 +307,6 @@
       }
 
       return JSON.stringify(requested)
-    }
-  }
-})();
-
-(function () {
-  SRHelper.$inject = ["inflector"];
-  angular
-    .module('SimpleResource')
-    .service('SRHelper', SRHelper)
-
-  function SRHelper (inflector) {
-    var service = {
-      isNumeric: isNumeric
-    }
-
-    return service
-
-    /**
-     * Check whether an object is a number.
-     *
-     * @param  {Object} object - Object to check numericallity on.
-     * @return {Boolean} True if number, false otherwise.
-     */
-    function isNumeric (object) {
-      return !isNaN(parseFloat(object)) && isFinite(object);
     }
   }
 })();
